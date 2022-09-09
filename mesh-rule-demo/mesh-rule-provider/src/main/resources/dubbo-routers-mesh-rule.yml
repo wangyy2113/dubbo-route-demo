@@ -1,0 +1,65 @@
+#
+#
+#   Licensed to the Apache Software Foundation (ASF) under one or more
+#   contributor license agreements.  See the NOTICE file distributed with
+#   this work for additional information regarding copyright ownership.
+#   The ASF licenses this file to You under the Apache License, Version 2.0
+#   (the "License"); you may not use this file except in compliance with
+#   the License.  You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+#
+#
+
+
+apiVersion: service.wangyy.demo.org/v1alpha1
+kind: VirtualService
+metadata: {name: demo-route/idc-router}
+spec:
+  hosts: [demo]
+  dubbo:
+    - routedetail:
+        - name: n1-match
+          match:
+            - attachments:
+                dubboContext: {idc: {exact: n1}}
+          route:
+            - destination: {host: demo, subset: idc-n1, fallback: {destination: {host: demo, subset: allnz}}}
+        - name: n2-match
+          match:
+            - attachments:
+                dubboContext: {idc: {exact: n2}}
+          route:
+            - destination: {host: demo, subset: idc-n2, fallback: {destination: {host: demo, subset: allnz}}}
+        - name: s1-match
+          match:
+            - attachments:
+                dubboContext: {idc: {exact: s1}}
+          route:
+            - destination: {host: demo, subset: idc-s1, fallback: {destination: {host: demo, subset: allsg}}}
+
+
+---
+
+apiVersion: service.wangyy.demo.org/v1alpha1
+kind: DestinationRule
+metadata: {name: demo-route/idc-router}
+spec:
+  host: demo
+  subsets:
+    - name: idc-n1
+      labels: {idc: n1}
+    - name: idc-n2
+      labels: {idc: n2}
+    - name: idc-s1
+      labels: {idc: s1}
+    - name: allnz
+      labels: {entity: TBNZ}
+    - name: allsg
+      labels: {entity: TBSG}
