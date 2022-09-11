@@ -23,15 +23,8 @@ docker run --net dubbo-route-demo-bridge --ip 172.19.0.5 -e DUBBO_PROVIDER_CONF_
 #TBSG下s1机房 1台实例
 docker run --net dubbo-route-demo-bridge --ip 172.19.0.6 -e DUBBO_PROVIDER_CONF_F=mesh-rule-provider-sg-s1-1.xml -e DUBBO_IP_TO_REGISTRY=172.19.0.6 -p 20884:20880 -p 8084:8080 --name TBSG-s1-1 -it -d --rm mesh-rule-provider
 
+# 等待provider启动
 sleep 30
-echo "-------------------------------------------------"
-
-echo "
-----------inital rule conf begin------------"
-## 请求任意实例初始化mesh-rule(非正常主流方式，这里只是为了简单)，上报至配置中心
-curl 127.0.0.1:8081/mesh-rule-demo/provider/conf/rule -X POST
-echo "
-----------inital rule conf end--------------"
 
 echo "
 #######################################

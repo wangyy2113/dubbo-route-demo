@@ -30,7 +30,7 @@ public class MeshRuleConsumerApplication {
                 if (idc != null) {
                     RpcContext.getServiceContext().setAttachment("idc", idc);
                 }
-                String request = "consumer[entity=" + entity + " idc=" + idc + "]";
+                String request = "Consumer[entity=" + entity + " idc=" + idc + "]";
                 String result = demoService.hello(request);
                 System.out.println(result);
                 sleep(500);

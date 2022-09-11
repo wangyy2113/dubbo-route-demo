@@ -17,6 +17,7 @@
     </parent>
 
     <modules>
+        <module>mesh-rule-control</module>
         <module>mesh-rule-api</module>
         <module>mesh-rule-provider</module>
         <module>mesh-rule-consumer</module>
@@ -30,7 +31,6 @@
         <dubbo.version>3.1.0</dubbo.version>
         <spring.version>5.2.12.RELEASE</spring.version>
         <spring-boot.version>2.2.13.RELEASE</spring-boot.version>
-        <tomcat.version>9.0.41</tomcat.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
     </properties>
 

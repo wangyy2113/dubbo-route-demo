@@ -1,4 +1,4 @@
-package com.wangyy.mesh.rule.provider.utils;
+package com.wangyy.mesh.rule.control;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -11,7 +11,9 @@ public class RuleUtil {
     private static String zookeeperHost = System.getProperty("zookeeper.address", "172.19.0.2");
     private static CuratorFramework client;
 
-    private static final String RULE_CONF_NODE_LOCATION = "/dubbo/config/dubbo/mesh-rule-provider.MESHAPPRULE";
+    private static final String RULE_CONF_FILE_PATH = "/dubbo-routers-mesh-rule.yml";
+
+    private static final String RULE_CONF_ZK_NODE_LOCATION = "/dubbo/config/dubbo/mesh-rule-provider.MESHAPPRULE";
 
     public static void main(String[] args) throws Exception {
         initClient();
@@ -25,8 +27,8 @@ public class RuleUtil {
     }
 
     public static void generateRule() {
-        try (InputStream yamlStream = RuleUtil.class.getResourceAsStream("/dubbo-routers-mesh-rule.yml")) {
-            String path = RULE_CONF_NODE_LOCATION;
+        try (InputStream yamlStream = RuleUtil.class.getResourceAsStream(RULE_CONF_FILE_PATH)) {
+            String path = RULE_CONF_ZK_NODE_LOCATION;
             if (client.checkExists().forPath(path) == null) {
                 client.create().creatingParentsIfNeeded().forPath(path);
             }
@@ -37,7 +39,7 @@ public class RuleUtil {
     }
 
     public static void deleteRule() throws Exception {
-        String path = RULE_CONF_NODE_LOCATION;
+        String path = RULE_CONF_ZK_NODE_LOCATION;
         if (client.checkExists().forPath(path) == null) {
             client.create().creatingParentsIfNeeded().forPath(path);
         }
