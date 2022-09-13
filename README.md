@@ -8,7 +8,7 @@ triple | docker | spring-boot | mesh-route | 统一路由配置 | 同机房路�
 docker & jdk1.8 & maven & git
 
 #### 说明
-> * *路由策略*见 /dubbo-route-demo/mesh-rule-demo/mesh-rule-control/src/main/resources/dubbo-routers-mesh-rule.yml (相同机房优先路由,fallback牌照路由)
+> * *路由策略*见 /dubbo-route-demo/mesh-rule-demo/mesh-rule-control/src/main/resources/dubbo-routers-mesh-rule.yml (相同机房优先路由, fallback牌照路由)
 > * entity代表牌照信息: TBNZ TBSG
 > * idc代表机房信息: n1 n2 s1
 > * consumer请求attachment中写入entity与idc信息，根据此信息选择路由策略并执行请求
