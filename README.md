@@ -10,7 +10,7 @@ docker & jdk1.8 & maven & git
 #### 说明
 > * entity代表牌照信息: TBNZ TBSG
 > * idc代表机房信息: n1 n2 s1
-> * 路由策略见 /dubbo-route-demo/mesh-rule-demo/mesh-rule-provider/src/main/resources/dubbo-routers-mesh-rule.yml (相同机房优先路由,fallback牌照路由)
+> * 路由策略见 /dubbo-route-demo/mesh-rule-demo/mesh-rule-control/src/main/resources/dubbo-routers-mesh-rule.yml (相同机房优先路由,fallback牌照路由)
 > * consumer请求attachment中写入entity与idc信息，根据此信息选择路由策略并执行请求
 
 ![image](https://github.com/wangyy2113/dubbo-route-demo/blob/main/mesh-rule-demo/mesh-rule-demo.png)
